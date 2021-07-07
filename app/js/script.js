@@ -10,15 +10,34 @@ let nc = 24; // número de cuadrados que forman el ancho y el alto del lienzo
 
 let xv = 0, yv = 0;
 let px = 20, py = 20; // posición (x,y) actual de la cabeza del gusano
-let ax = 20, ay = 20; // posición (x,y) actual del cuadrado rojo
+let ax = 17, ay = 17; // posición (x,y) actual del cuadrado rojo
 
 let gusano = []; // array que almacena las coordenadas (x,y) que forman el cuerpo del gusano
 let tam = 7; // tamaño del gusano, en número de cuadrados. Tamaño inicial es 7
 
+function tecla(event){
+  xv = 0;
+  yv = 0;
+  console.log(event.keyCode);
+  switch(event.keyCode){
+    case 37: // se pulsa flecha a la iz.
+      xv = -1;
+      break;
+    case 38: // se pulsa flecha arriba
+      yv = -1;
+      break;
+    case 39: // se pulsa fleca a derecha
+      xv = 1;
+      break;
+    case 40: // se pulsa fleca abajo
+      yv = 1;
+      break;
+  }
+}
 
 function inicio() {
-  canvas-document.getElementById('lienzo');
-  context-canvas.getContext("2d");
+  canvas = document.getElementById('lienzo');
+  context = canvas.getContext("2d");
 
   // definimos un oyente para el evento 'tecla pulsada'
   document.addEventListener("keydown", tecla);
@@ -33,13 +52,13 @@ function juego() {
   if(px < 0){
     px = nc - 1;
   }
-  if(px < nc - 1){
+  if(px > nc - 1){
     px = 0;
   }
   if(py < 0){
     py = nc - 1;
   }
-  if(px > nc - 1){
+  if(py > nc - 1){
     py = 0;
   }
   
@@ -48,12 +67,12 @@ function juego() {
   context.fillRect(0,0, canvas.width, canvas.height);
 
   // pintando el gusano color amarillo
-  context.fillStyle = "blue";
+  context.fillStyle = "yellow";
   let i, n = gusano.length;
 
   for(i = 0; i < n; i++){
-    context.fillRect(gusano[1].x * grosor, gusano[1].y * grosor, grosor - 1, grosor - 1);
-    if(gusano[1].x === px && gusano[1].y === py){
+    context.fillRect(gusano[i].x * grosor, gusano[i].y * grosor, grosor - 1, grosor - 1);
+    if(gusano[i].x === px && gusano[i].y === py){
       tam = 7;
     }
   }
@@ -75,31 +94,17 @@ function juego() {
 
     // se muestra el puntaje del jugador
     puntos = puntos + 1;
-    DocumentTimeline.getElementById("score").innerHTML = "Puntuación: " + puntos;
+    document.getElementById("score").innerHTML = "Puntuación: " + puntos;
 
   }
+
+  // se pinta el cuadrado rojo
+  context.fillStyle = "red";
+  context.fillRect(ax * grosor, ay * grosor, grosor, grosor);
+
+}
 
   // Devuelve un número entero aleatorio entre 0 y el valor de nc
   function aleatorio() {
     return Math.floor(Math.random()*nc);
   }
-
-  function tecla(event){
-    xv = 0;
-    yv = 0;
-    switch(event.keyCode){
-      case 37: // se pulsa flecha a la iz.
-        xv = -1;
-        break;
-      case 38: // se pulsa flecha arriba
-        yv = -1;
-        break;
-      case 39: // se pulsa fleca a derecha
-        xv = -1;
-        break;
-      case 40: // se pulsa fleca abajo
-        yv = -1;
-        break;
-    }
-  }
-}
