@@ -78,4 +78,9 @@ function juego() {
     DocumentTimeline.getElementById("score").innerHTML = "Puntuación: " + puntos;
 
   }
+
+  // Devuelve un número entero aleatorio entre 0 y el valor de nc
+  function aleatorio() {
+    return Math.floor(Math.random()*nc);
+  }
 }
