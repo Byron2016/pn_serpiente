@@ -43,3 +43,9 @@ function juego() {
     py = 0;
   }
 }
+
+// pintando el lienzo color azul
+context.fillStyle = "blue";
+context.fillRect(0,0, canvas.width, canvas.height);
+
+
