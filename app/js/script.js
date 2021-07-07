@@ -47,25 +47,42 @@ function inicio() {
 }
 
 function juego() {
+  //debugger;
   px = px + xv;
   py = py + yv;
-  if(px < 0){
-    px = nc - 1;
-  }
-  if(px > nc - 1){
-    px = 0;
-  }
-  if(py < 0){
-    py = nc - 1;
-  }
-  if(py > nc - 1){
-    py = 0;
-  }
+  validaLimites();
   
   // pintando el lienzo color azul
-  context.fillStyle = "blue";
-  context.fillRect(0,0, canvas.width, canvas.height);
+  pintarLienzo("blue")
 
+  // pintando el gusano color amarillo
+  pintaGusano()
+
+  // Si el gusano come un cuarado rojo:
+  subeMarcador()
+
+  // se pinta el cuadrado rojo
+  pintarRojo();
+}
+
+// Devuelve un número entero aleatorio entre 0 y el valor de nc
+function aleatorio() {
+  return Math.floor(Math.random()*nc);
+}
+
+function pintarLienzo(color){
+  // pintando el lienzo color azul
+  context.fillStyle = color;
+  context.fillRect(0,0, canvas.width, canvas.height);
+}
+
+function pintarRojo(){
+  // se pinta el cuadrado rojo
+  context.fillStyle = "red";
+  context.fillRect(ax * grosor, ay * grosor, grosor, grosor);
+}
+
+function pintaGusano(){
   // pintando el gusano color amarillo
   context.fillStyle = "yellow";
   let i, n = gusano.length;
@@ -83,7 +100,9 @@ function juego() {
   while(gusano.length > tam){
     gusano.shift();
   }
+}
 
+function subeMarcador(){
   // Si el gusano come un cuarado rojo:
   if(ax === px && ay === py){
     tam = tam + 1; // el gusano crece una unidad
@@ -97,14 +116,19 @@ function juego() {
     document.getElementById("score").innerHTML = "Puntuación: " + puntos;
 
   }
-
-  // se pinta el cuadrado rojo
-  context.fillStyle = "red";
-  context.fillRect(ax * grosor, ay * grosor, grosor, grosor);
-
 }
 
-  // Devuelve un número entero aleatorio entre 0 y el valor de nc
-  function aleatorio() {
-    return Math.floor(Math.random()*nc);
+function validaLimites(){
+  if(px < 0){
+    px = nc - 1;
   }
+  if(px > nc - 1){
+    px = 0;
+  }
+  if(py < 0){
+    py = nc - 1;
+  }
+  if(py > nc - 1){
+    py = 0;
+  }
+}
