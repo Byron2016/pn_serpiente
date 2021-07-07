@@ -26,3 +26,20 @@ function inicio() {
   // ejecutar la función juego cada cierto tiempo.
   setInterval(juego, velocidad);
 }
+
+function juego() {
+  px = px + xv;
+  py = py + yv;
+  if(px < 0){
+    px = nc - 1;
+  }
+  if(px < nc - 1){
+    px = 0;
+  }
+  if(py < 0){
+    py = nc - 1;
+  }
+  if(px > nc - 1){
+    py = 0;
+  }
+}
