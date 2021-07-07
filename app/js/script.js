@@ -16,3 +16,13 @@ let gusano = []; // array que almacena las coordenadas (x,y) que forman el cuerp
 let tam = 0; // tamaño del gusano, en número de cuadrados.
 
 
+function inicio() {
+  canvas-document.getElementById('lienzo');
+  context-canvas.getContext("2d");
+
+  // definimos un oyente para el evento 'tecla pulsada'
+  document.addEventListener("keydown", tecla);
+
+  // ejecutar la función juego cada cierto tiempo.
+  setInterval(juego, velocidad);
+}
