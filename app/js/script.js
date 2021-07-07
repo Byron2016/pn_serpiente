@@ -83,4 +83,23 @@ function juego() {
   function aleatorio() {
     return Math.floor(Math.random()*nc);
   }
+
+  function tecla(event){
+    xv = 0;
+    yv = 0;
+    switch(event.keyCode){
+      case 37: // se pulsa flecha a la iz.
+        xv = -1;
+        break;
+      case 38: // se pulsa flecha arriba
+        yv = -1;
+        break;
+      case 39: // se pulsa fleca a derecha
+        xv = -1;
+        break;
+      case 40: // se pulsa fleca abajo
+        yv = -1;
+        break;
+    }
+  }
 }
