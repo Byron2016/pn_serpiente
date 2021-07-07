@@ -1,3 +1,21 @@
 body {
-  
+  background: #212121;
+  color: white;
+}
+
+h3 {
+  margin-top: 18px;
+  margin-left: 440px;
+}
+
+canvas {
+  margin-top: 8px;
+  margin-left: 300px;
+}
+
+#score {
+  margin-top: 11px;
+  margin-left: 300px;
+  width: 480px;
+  text-align: right;
 }
