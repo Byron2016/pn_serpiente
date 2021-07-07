@@ -42,26 +42,40 @@ function juego() {
   if(px > nc - 1){
     py = 0;
   }
-}
+  
+  // pintando el lienzo color azul
+  context.fillStyle = "blue";
+  context.fillRect(0,0, canvas.width, canvas.height);
 
-// pintando el lienzo color azul
-context.fillStyle = "blue";
-context.fillRect(0,0, canvas.width, canvas.height);
+  // pintando el gusano color amarillo
+  context.fillStyle = "blue";
+  let i, n = gusano.length;
 
-// pintando el gusano color amarillo
-context.fillStyle = "blue";
-let i, n = gusano.length;
-
-for(i = 0; i < n; i++){
-  context.fillRect(gusano[1].x * grosor, gusano[1].y * grosor, grosor - 1, grosor - 1);
-  if(gusano[1].x === px && gusano[1].y === py){
-    tam = 7;
+  for(i = 0; i < n; i++){
+    context.fillRect(gusano[1].x * grosor, gusano[1].y * grosor, grosor - 1, grosor - 1);
+    if(gusano[1].x === px && gusano[1].y === py){
+      tam = 7;
+    }
   }
-}
-gusano.push({
-  x: px, 
-  y: py
-})
-while(gusano.length > tam){
-  gusano.shift();
+  gusano.push({
+    x: px, 
+    y: py
+  })
+  while(gusano.length > tam){
+    gusano.shift();
+  }
+
+  // Si el gusano come un cuarado rojo:
+  if(ax === px && ay === py){
+    tam = tam + 1; // el gusano crece una unidad
+
+    // se asigna una nueva posición aleatoria al cuadrado rojo
+    ax = aleatorio();
+    ay = aleatorio();
+
+    // se muestra el puntaje del jugador
+    puntos = puntos + 1;
+    DocumentTimeline.getElementById("score").innerHTML = "Puntuación: " + puntos;
+
+  }
 }
