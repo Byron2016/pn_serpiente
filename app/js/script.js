@@ -13,7 +13,7 @@ let px = 20, py = 20; // posición (x,y) actual de la cabeza del gusano
 let ax = 20, ay = 20; // posición (x,y) actual del cuadrado rojo
 
 let gusano = []; // array que almacena las coordenadas (x,y) que forman el cuerpo del gusano
-let tam = 0; // tamaño del gusano, en número de cuadrados.
+let tam = 7; // tamaño del gusano, en número de cuadrados. Tamaño inicial es 7
 
 
 function inicio() {
@@ -48,4 +48,20 @@ function juego() {
 context.fillStyle = "blue";
 context.fillRect(0,0, canvas.width, canvas.height);
 
+// pintando el gusano color amarillo
+context.fillStyle = "blue";
+let i, n = gusano.length;
 
+for(i = 0; i < n; i++){
+  context.fillRect(gusano[1].x * grosor, gusano[1].y * grosor, grosor - 1, grosor - 1);
+  if(gusano[1].x === px && gusano[1].y === py){
+    tam = 7;
+  }
+}
+gusano.push({
+  x: px, 
+  y: py
+})
+while(gusano.length > tam){
+  gusano.shift();
+}
